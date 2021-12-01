@@ -15,10 +15,16 @@ namespace TelPhoneApp {
             InitializeComponent();
         }
         private void btnAdd_Click(object sender, EventArgs e) {
-            Person per = new Person(txtName.Text, txtPhone.Text);
-            pList.Add(per);
-            Text = pList.Count.ToString();
-            UpdateDisplay();
+            if(txtName.Text != "" && txtPhone.Text != "") {
+                Person per = new Person(txtName.Text, txtPhone.Text);
+                pList.Add(per);
+
+                txtName.Text = "";
+                txtPhone.Text = "";
+                txtName.Focus();
+                UpdateDisplay();
+            }
+            
         }
         private void UpdateDisplay() {
             lbDisplay.Items.Clear();
