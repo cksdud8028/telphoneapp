@@ -22,15 +22,58 @@ namespace TelPhoneApp {
                 txtName.Text = "";
                 txtPhone.Text = "";
                 txtName.Focus();
-                UpdateDisplay();
+                UpdateDisplay(pList);
             }
             
         }
-        private void UpdateDisplay() {
-            lbDisplay.Items.Clear();
-            for (int i = 0; i < pList.Count; ++i)
-                lbDisplay.Items.Add(pList[i].ToString());
+
+        private void btnSearch_Click(object sender, EventArgs e) {
+            string name = txtSearch.Text;
+            if (name == "") {
+                return;
+            }
+
+            txtSearch.Text = "";
+            txtSearch.Focus();
+
+            People tlist = new People();
+
+            for(int i = 0; i < pList.Count; i++) {
+                if( pList[i].Name == name) {
+                    tlist.Add(pList[i]);
+                }
+            }
+            UpdateDisplay(tlist);
         }
+
+        private void btnRemove_Click(object sender, EventArgs e) {
+            string phone = txtRemove.Text;
+            if (phone == "") {
+                return;
+            }
+
+            txtRemove.Text = "";
+            txtRemove.Focus();
+
+            for (int i = 0; i < pList.Count; i++) {
+                if (pList[i].Phone == phone) {
+                    pList.Remove(i);
+                }
+            }
+            UpdateDisplay(pList);   
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e) {
+            UpdateDisplay(pList);
+        }
+
+        private void UpdateDisplay(People lt) {
+            lbDisplay.Items.Clear();
+            for (int i = 0; i < lt.Count; i++)
+                lbDisplay.Items.Add(lt[i].ToString());
+        }
+
+        
     }
     
     
